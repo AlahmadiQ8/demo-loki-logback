@@ -1,0 +1,29 @@
+<configuration debug="true">
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date [%level] %logger dfsdfdsf- %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="Loki" class="pl.tkowalcz.tjahzi.logback.LokiAppender">
+        <host>localhost</host>
+        <port>3100</port>
+        <protocol>http</protocol>
+
+        <efficientLayout>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </efficientLayout>
+
+        <label>
+            <name>server</name>
+            <value>myserver</value>
+        </label>
+    </appender>
+
+    <logger name="org.apache.http" level="WARN"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="Loki"/>
+    </root>
+</configuration>
